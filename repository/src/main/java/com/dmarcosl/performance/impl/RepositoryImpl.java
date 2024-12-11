@@ -6,6 +6,7 @@ import com.dmarcosl.performance.repository.ModelRepository;
 import com.dmarcosl.performance.repository.RepositoryInterface;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +28,6 @@ public class RepositoryImpl implements RepositoryInterface {
 
   @Override
   public List<Domain> findAll() {
-    return modelRepository.findAll().stream().map(modelMapper::fromModel).toList();
+    return modelRepository.findAllLimit(PageRequest.of(0, 10000)).stream().map(modelMapper::fromModel).toList();
   }
 }
